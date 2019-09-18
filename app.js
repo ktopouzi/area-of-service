@@ -45,7 +45,7 @@ function initMap() {
     anchorPoint: new google.maps.Point(0, -29)
   });
 
-  autocomplete.addListener("place_changed", function () {
+  autocomplete.addListener("place_changed", function() {
     infowindow.close();
     marker.setVisible(false);
     var place = autocomplete.getPlace();
@@ -65,13 +65,13 @@ function initMap() {
       address = [
         (place.address_components[0] &&
           place.address_components[0].short_name) ||
-        "",
+          "",
         (place.address_components[1] &&
           place.address_components[1].short_name) ||
-        "",
+          "",
         (place.address_components[2] &&
           place.address_components[2].short_name) ||
-        ""
+          ""
       ].join(" ");
     }
 
@@ -88,15 +88,9 @@ function initMap() {
     if (!check_is_in_or_out(storeCircle, markerPos))
       alert(
         "Δεν υπάρχουν διαθέσιμα καταστήματα για την διεύθυνση " +
-        infowindowContent.children["place-address"].textContent
-      );
-    else
-      alert(
-        "Yπάρχουν διαθέσιμα καταστήματα για την διεύθυνση " +
-        infowindowContent.children["place-address"].textContent
+          infowindowContent.children["place-address"].textContent
       );
   });
-
 
   createRadius();
 }
@@ -160,7 +154,7 @@ function addStore() {
 }
 
 function hidePanel() {
-  jQuery(".add-new").on("click", function () {
+  jQuery(".add-new").on("click", function() {
     if (jQuery(".stores").is(":visible")) jQuery(".stores").hide();
     else jQuery(".stores").show();
   });
