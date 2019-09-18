@@ -1,5 +1,5 @@
 function stores() {
-    if (localStorage.getItem("stores")) return;
+  if (localStorage.getItem("stores")) return;
   var stores = [
     {
       name: "Test1",
@@ -12,7 +12,7 @@ function stores() {
       lng: 22.9066067
     }
   ];
-  
+
   localStorage.setItem("stores", JSON.stringify(stores));
 }
 stores();
@@ -45,7 +45,7 @@ function initMap() {
     anchorPoint: new google.maps.Point(0, -29)
   });
 
-  autocomplete.addListener("place_changed", function() {
+  autocomplete.addListener("place_changed", function () {
     infowindow.close();
     marker.setVisible(false);
     var place = autocomplete.getPlace();
@@ -65,13 +65,13 @@ function initMap() {
       address = [
         (place.address_components[0] &&
           place.address_components[0].short_name) ||
-          "",
+        "",
         (place.address_components[1] &&
           place.address_components[1].short_name) ||
-          "",
+        "",
         (place.address_components[2] &&
           place.address_components[2].short_name) ||
-          ""
+        ""
       ].join(" ");
     }
 
@@ -88,47 +88,45 @@ function initMap() {
     if (!check_is_in_or_out(storeCircle, markerPos))
       alert(
         "Δεν υπάρχουν διαθέσιμα καταστήματα για την διεύθυνση " +
-          infowindowContent.children["place-address"].textContent
+        infowindowContent.children["place-address"].textContent
       );
     else
       alert(
         "Yπάρχουν διαθέσιμα καταστήματα για την διεύθυνση " +
-          infowindowContent.children["place-address"].textContent
+        infowindowContent.children["place-address"].textContent
       );
   });
 
- 
+
   createRadius();
 }
 var storeCircle = new Array();
-function createRadius()
-{
-    clearMarkers();
-    var lst = JSON.parse(localStorage.getItem("stores"));
-    for (var currentStore in lst) {
-      var temp = new google.maps.LatLng(
-        lst[currentStore]["lat"],
-        lst[currentStore]["lng"]
-      );
-      storeCircle.push(
-        new google.maps.Circle({
-          strokeColor: "#FF0000",
-          strokeOpacity: 0.8,
-          strokeWeight: 2,
-          fillColor: "#FF0000",
-          fillOpacity: 0.35,
-          map: map,
-          center: temp,
-          radius: 2000
-        })
-      );
-    }
+function createRadius() {
+  clearMarkers();
+  var lst = JSON.parse(localStorage.getItem("stores"));
+  for (var currentStore in lst) {
+    var temp = new google.maps.LatLng(
+      lst[currentStore]["lat"],
+      lst[currentStore]["lng"]
+    );
+    storeCircle.push(
+      new google.maps.Circle({
+        strokeColor: "#FF0000",
+        strokeOpacity: 0.8,
+        strokeWeight: 2,
+        fillColor: "#FF0000",
+        fillOpacity: 0.35,
+        map: map,
+        center: temp,
+        radius: 2000
+      })
+    );
+  }
 }
-function clearMarkers()
-{
-    for (var currentStore in storeCircle) {
-        storeCircle[currentStore].setMap(null);
-    }
+function clearMarkers() {
+  for (var currentStore in storeCircle) {
+    storeCircle[currentStore].setMap(null);
+  }
 }
 
 function check_is_in_or_out(storeCircle, marker) {
@@ -162,7 +160,7 @@ function addStore() {
 }
 
 function hidePanel() {
-  jQuery(".add-new").on("click", function() {
+  jQuery(".add-new").on("click", function () {
     if (jQuery(".stores").is(":visible")) jQuery(".stores").hide();
     else jQuery(".stores").show();
   });

@@ -1,149 +1,159 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Map</title>
-    <meta name="viewport" content="initial-scale=1.0" />
-    <meta charset="utf-8" />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <style>
-      /* Always set the map height explicitly to define the size of the div
+
+<head>
+  <title>Area of service for customers</title>
+  <meta name="viewport" content="initial-scale=1.0" />
+  <meta charset="utf-8" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <style>
+    /* Always set the map height explicitly to define the size of the div
        * element that contains the map. */
-      #map {
-        height: 100%;
-      }
-      /* Optional: Makes the sample page fill the window. */
-      html,
-      body {
-        height: 100%;
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        font-family: sans-serif;
-      }
-      .stores {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: flex-start;
-        padding: 20px;
-      }
-      .stores-wrapper {
-        width: 100%;
-        display: block;
-        padding: 20px;
-      }
-      span.add-new {
-        border: 2px solid #0f213d;
-        padding: 10px;
-        border-radius: 20px;
-      }
-      .pac-card {
-        margin: 10px 10px 0 0;
-        border-radius: 2px 0 0 2px;
-        box-sizing: border-box;
-        -moz-box-sizing: border-box;
-        outline: none;
-        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
-        background-color: #fff;
-      }
-      #pac-container {
-        padding-bottom: 12px;
-        margin-right: 12px;
-      }
+    #map {
+      height: 100%;
+    }
 
-      .pac-controls {
-        display: inline-block;
-        padding: 5px 11px;
-      }
+    /* Optional: Makes the sample page fill the window. */
+    html,
+    body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: sans-serif;
+    }
 
-      .pac-controls label {
-        font-size: 13px;
-        font-weight: 300;
-      }
+    .stores {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 20px;
+    }
 
-      #pac-input {
-        background-color: #fff;
-        font-size: 15px;
-        font-weight: 300;
-        margin-left: 12px;
-        margin-top: 12px;
-        padding: 0 11px 0 13px;
-        text-overflow: ellipsis;
-        width: 400px;
-      }
+    .stores-wrapper {
+      width: 100%;
+      display: block;
+      padding: 20px;
+    }
 
-      #pac-input:focus {
-        border-color: #0f213d;
-      }
+    span.add-new {
+      border: 2px solid #0f213d;
+      padding: 10px;
+      border-radius: 20px;
+    }
 
-      #title {
-        color: #fff;
-        background-color: #0f213d;
-        font-size: 25px;
-        font-weight: 500;
-        padding: 6px 12px;
-      }
-      input {
-        border-radius: 10px;
-        box-sizing: border-box;
-        box-shadow: 0 0 10px 0 #00000030;
-        border: 0;
-        padding: 0.2rem;
-      }
-      .item {
-        padding: 10px 0;
-      }
-      button#add-store {
-        background: white;
-        border: 1px solid #000000;
-        border-radius: 20px;
-        width: 60px;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="stores-wrapper">
-      <span class="add-new">Add new Store +</span>
-      <div style="display: none" class="stores">
-        <div class="item store">
-          <label for="">Store name</label>
-          <input required type="text" name="" id="store-name" />
-        </div>
-        <div class="item lat">
-          <label for="">Lat</label>
-          <input required type="text" name="" id="lat" />
-        </div>
-        <div class="item lng">
-          <label for="">lng</label>
-          <input required type="text" name="" id="lng" />
-        </div>
+    .pac-card {
+      margin: 10px 10px 0 0;
+      border-radius: 2px 0 0 2px;
+      box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      outline: none;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+      background-color: #fff;
+    }
 
-        <button style="margin-top: 10px;" id="add-store" onclick="addStore()">
-          ADD
-        </button>
+    #pac-container {
+      padding-bottom: 12px;
+      margin-right: 12px;
+    }
+
+    .pac-controls {
+      display: inline-block;
+      padding: 5px 11px;
+    }
+
+    .pac-controls label {
+      font-size: 13px;
+      font-weight: 300;
+    }
+
+    #pac-input {
+      background-color: #fff;
+      font-size: 15px;
+      font-weight: 300;
+      margin-left: 12px;
+      margin-top: 12px;
+      padding: 0 11px 0 13px;
+      text-overflow: ellipsis;
+      width: 400px;
+    }
+
+    #pac-input:focus {
+      border-color: #0f213d;
+    }
+
+    #title {
+      color: #fff;
+      background-color: #0f213d;
+      font-size: 25px;
+      font-weight: 500;
+      padding: 6px 12px;
+    }
+
+    input {
+      border-radius: 10px;
+      box-sizing: border-box;
+      box-shadow: 0 0 10px 0 #00000030;
+      border: 0;
+      padding: 0.2rem;
+    }
+
+    .item {
+      padding: 10px 0;
+    }
+
+    button#add-store {
+      background: white;
+      border: 1px solid #000000;
+      border-radius: 20px;
+      width: 60px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="stores-wrapper">
+    <span class="add-new">Add new Store +</span>
+    <div style="display: none" class="stores">
+      <div class="item store">
+        <label for="">Store name</label>
+        <input required type="text" name="" id="store-name" />
+      </div>
+      <div class="item lat">
+        <label for="">Lat</label>
+        <input required type="text" name="" id="lat" />
+      </div>
+      <div class="item lng">
+        <label for="">lng</label>
+        <input required type="text" name="" id="lng" />
+      </div>
+
+      <button style="margin-top: 10px;" id="add-store" onclick="addStore()">
+        ADD
+      </button>
+    </div>
+  </div>
+  <div class="pac-card" id="pac-card">
+    <div>
+      <div id="title">
+        Search Address
       </div>
     </div>
-    <div class="pac-card" id="pac-card">
-      <div>
-        <div id="title">
-          Search Address
-        </div>
-      </div>
-      <div id="pac-container">
-        <input id="pac-input" type="text" placeholder="Εισαγωγή Διεύθυνσης" />
-      </div>
+    <div id="pac-container">
+      <input id="pac-input" type="text" placeholder="Εισαγωγή Διεύθυνσης" />
     </div>
-    <div id="map"></div>
-    <div id="infowindow-content">
-      <img src="" width="16" height="16" id="place-icon" />
-      <span id="place-name" class="title"></span><br />
-      <span id="place-address"></span>
-    </div>
-    <script src="./app.js"></script>
-    <script
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCBO85Sa0M1ycWk3JnFEJ9sj_YFP77XfZM&callback=initMap&libraries=places"
-      async
-      defer
-    ></script>
-  </body>
+  </div>
+  <div id="map"></div>
+  <div id="infowindow-content">
+    <img src="" width="16" height="16" id="place-icon" />
+    <span id="place-name" class="title"></span><br />
+    <span id="place-address"></span>
+  </div>
+  <script src="./app.js"></script>
+  <script
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCBO85Sa0M1ycWk3JnFEJ9sj_YFP77XfZM&callback=initMap&libraries=places"
+    async defer></script>
+</body>
+
 </html>
